@@ -1,0 +1,44 @@
+Figured it out:
+
+1) You have to make a makefile; I use PuTTY to accomplish this for example.
+
+2) Since we want the makefile to be "extension-less", producing the makefile in Unix is ideal.
+
+3) here's how you would write it in this case (in PuTTY, using vi editor) :
+
+    vi makefile [PRESS ENTER]
+
+    
+    HT: hashTable.o linkedList.o main.o
+              g++ hashTable.o linkedList.o main.o -o HT
+    hashTable.o: hashTable.cpp hashTable.h linkedList.h
+              g++ -c hashTable.cpp
+    linkedList.o: linkedList.cpp linkedList.h
+              g++ -c linkedList.cpp
+    main.o: main.cpp hashTable.h linkedList.h
+              g++ -c main.cpp
+    clean:
+              rm -f *.o
+
+
+The basic setup here is:
+
+    Label: all object files seperated with a space
+           g++ all object files seperated with a space -o Label
+    objectFile.o: objectFile.cpp  dependencies.h ...etc.
+           g++ -c objectFile.cpp
+    .      
+    .      
+    .      
+    etc........................
+    clean:
+           rm -f *.o
+
+
+#--EDIT--
+
+If you don't want to make a makefile, you can defenitely just type in PuTTY the following: 
+
+> g++ -o HT hashtable.cpp linkedList.cpp main.cpp
+
+However, you will have to type this every time you alter your code as opposed to the makefile.
